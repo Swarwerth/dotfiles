@@ -79,8 +79,8 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'ycm-core/YouCompleteMe' " Auto completion
-Plugin 'zxqfl/tabnine-vim' " Tabnine
+" Plugin 'ycm-core/YouCompleteMe' " Auto completion
+" Plugin 'zxqfl/tabnine-vim' " Tabnine
 
 Plugin 'rafi/awesome-vim-colorschemes' " Themes for vim
 Plugin 'itchyny/lightline.vim' " Tabline
@@ -95,7 +95,7 @@ Plugin 'airblade/vim-gitgutter'
 
 Plugin 'lervag/vimtex' " LaTeX
 Plugin 'Yggdroot/indentLine' " Indentation
-Plugin '907th/vim-auto-save' " Auto-save
+" Plugin '907th/vim-auto-save' " Auto-save
 
 call vundle#end()
 filetype plugin indent on
