@@ -1,25 +1,19 @@
 # Basic Makefile <3
 
 CC = gcc
-CPPFLAGS = -MMD
 CFLAGS = -Wall -Wextra -std=c99 -O2
-LDFLAGS =
-LDLIBS =
 
-SRC = ${wildcard *.c}
-OBJ = ${SRC:.c=.o}
-DEP = ${SRC:.c=.d}
+OBJ = main.o
+BIN = main
 
-all: main
+all: $(BIN)
 
-main: ${OBJ}
+$(BIN): $(OBJ)
 
--include ${DEP}
-.PHONY: clean
+debug: CFLAGS += -g -O0
+debug: clean $(BIN)
 
 clean:
-	${RM} ${OBJ}
-	${RM} ${DEP}
-	${RM} main
+	$(RM) $(OBJ) $(BIN)
 
 # END
