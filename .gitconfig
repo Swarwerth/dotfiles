@@ -3,6 +3,10 @@
     name = Clement NGUYEN
 
 [alias]
+    kk = status --untracked-files
+    cm = commit -sm
+    pusht = push --follow-tags
+
     lg = lg1
     lg1 = lg1-specific --all
     lg2 = lg2-specific --all
