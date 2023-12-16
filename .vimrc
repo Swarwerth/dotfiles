@@ -1,29 +1,8 @@
 " ~/.vimrc
 
-" Restricted length
-set colorcolumn=80
-set textwidth=80
-
 " Syntax on
-noremap <C-i> :syntax on<cr>
-
-" Set encoding
-set encoding=utf-8
-
-" Disable beeping
-set belloff=all
-
-" Using clipboard as the default register
-set clipboard=unnamedplus
-
-" Fix backspace
-set backspace=eol,start,indent
-
-" For performence
-set lazyredraw
-
-" Display space after lines
-set list listchars=tab:»·,trail:·
+filetype on
+syntax on
 
 " Converting tabs to spaces
 set expandtab
@@ -33,59 +12,51 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=8
 
-" Indent
-set smartindent
-set autoindent
-set cindent
+" Search
+set incsearch
+" set hlsearch
+set ignorecase
+set smartcase
 
-" Number line
+" Interface
 set number
+set cc=80
+set wildmenu
+set scrolloff=10
 
-" Enable relative numbers
-" set relativenumber
+" File
+set autoread
+set autowrite
 
-" Scrolling
+" Miscellaneaous
+set list
+set list listchars=tab:»·,trail:·
+set encoding=utf-8
+set belloff=all
+set backspace=eol,start,indent
+set linebreak
+set cursorline
 set mouse=a
 
-" Wrapping text
-set linebreak
-
-" Highlight the line under scheme
-set cursorline
-
-" Text seleted to clipboard
+" Clipboard
 set clipboard=autoselect
 
-" Enable syntax highlighting
-syntax enable
-syntax on
+" Performence
+set lazyredraw
 
-" Highlight search
-set hlsearch
-
-" Enable spellchecking
-set spell
 
 " Vundle config
 
 " Use VIM settings
 set nocompatible
 
-" Detect the type of file
-filetype off
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-" Plugin 'ycm-core/YouCompleteMe' " Auto completion
-" Plugin 'zxqfl/tabnine-vim' " Tabnine
-
 Plugin 'rafi/awesome-vim-colorschemes' " Themes for vim
 Plugin 'itchyny/lightline.vim' " Tabline
-" Plugin 'vim-airline/vim-airline' " Bottom bar
-" Plugin 'vim-airline/vim-airline-themes' " Themes for bottom bar
 
 Plugin 'preservim/nerdtree' " Tree of files
 
@@ -93,9 +64,7 @@ Plugin 'preservim/nerdtree' " Tree of files
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 
-Plugin 'lervag/vimtex' " LaTeX
 Plugin 'Yggdroot/indentLine' " Indentation
-" Plugin '907th/vim-auto-save' " Auto-save
 
 call vundle#end()
 filetype plugin indent on
@@ -155,3 +124,17 @@ noremap <F7> :if exists("g:syntax_on") <Bar>
     \ else <Bar>
     \ syntax enable <Bar>
     \ endif <CR>
+
+" Make configuration
+autocmd Filetype make setlocal noexpandtab
+
+set list listchars=tab:»·,trail:·
+
+" per .git vim configs
+" just `git config vim.settings "expandtab sw=4 sts=4"` in a git repository
+" change sybtax settings for this repository
+let git_settings = system("git config --get vim.settings")
+if strlen(git_settings)
+        exe "set" git_settings
+endif
+
