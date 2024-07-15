@@ -91,18 +91,29 @@ _open_files_for_editing() {
 . ~/.z.sh
 
 alias ls='ls --color=auto'
+alias nano=sl
 alias l='ls -lav --ignore=. --ignore=..'   # show long listing but no hidden dotfiles except "."
 alias rm='rm -v --preserve-root'
 alias mkdir='mkdir -p'
 alias ..='cd ..'
-alias gdb='gdb -q -tui'
-alias cf='clang-format --verbose -i *.c *.h'
+
+alias bat='bat -p'
+alias py='python3'
 alias untar='tar -xvf'
+alias display=sl
+
+alias gdb='gdb -q -tui'
+alias cf='clang-format --verbose -i'
+alias make='make -j'
 
 alias gcce='gcc -std=c99 -Wall -Wextra -Werror -Wvla -pedantic'
 alias gcct='gcc -std=c99 -Wall -Wextra -Werror -Wvla -pedantic -fsanitize=address -g'
 
-export PATH=$PATH:~/.nix-profile/bin
+alias gpp='g++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++20 *.cc -o '
+alias clangpp='clang++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++20 *.cc -o '
 
-alias mklear='rm -rf aclocal.m4 ar-lib autom4te.cache build compile configure depcomp install-sh missing */Makefile.in */*.gcno config.log config.status */*.html */*.gcda */*.o */*.a */*.diff docs/html Makefile.in src/*/Makefile.in src/*/Makefile tests/*/*/*.diff'
-alias build42='autoreconf --verbose --install ; ./configure ; make'
+export PATH=$PATH:~/.nix-profile/bin:/opt:/opt/apache-maven-3.8.8/bin
+export PGDATA="$HOME/postgres_data"
+export PGHOST="/tmp"
+
+eval "$(zoxide init --cmd cd bash)"
