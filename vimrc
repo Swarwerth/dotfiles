@@ -31,6 +31,7 @@ set autowrite
 " Miscellaneaous
 set list
 set list listchars=tab:»·,trail:·
+"set list listchars=tab:»-,trail:-
 set encoding=utf-8
 set belloff=all
 set backspace=eol,start,indent
@@ -44,7 +45,6 @@ set clipboard=autoselect
 " Performence
 set lazyredraw
 
-
 " Vundle config
 
 " Use VIM settings
@@ -55,16 +55,18 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rafi/awesome-vim-colorschemes' " Themes for vim
-Plugin 'itchyny/lightline.vim' " Tabline
 
 Plugin 'preservim/nerdtree' " Tree of files
 
 " Git
-Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 
 Plugin 'Yggdroot/indentLine' " Indentation
+
+Plugin 'valloric/youcompleteme'
 
 call vundle#end()
 filetype plugin indent on
@@ -72,14 +74,17 @@ filetype plugin indent on
 " Themes
 set termguicolors
 set background=dark
-colorscheme onehalfdark
+colorscheme iceberg
 
-" Tabline
-" let g:airline_theme='onehalfdark'
-set laststatus=2
 let g:lightline = {
-    \ 'colorscheme': 'one',
+    \ 'colorschme': 'iceberg',
     \ }
+
+" Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+let g:ycm_clangd_binary_path = exepath("clangd")
+set completeopt-=preview
 
 " Indent line to |
 let g:indentLine_char='|'
@@ -118,17 +123,9 @@ endfunction
 " CTRL + t - Display Tree
 noremap <C-t> :NERDTreeToggle<cr>
 
-" F7 - Remove syntax
-noremap <F7> :if exists("g:syntax_on") <Bar>
-    \ syntax off <Bar>
-    \ else <Bar>
-    \ syntax enable <Bar>
-    \ endif <CR>
-
 " Make configuration
 autocmd Filetype make setlocal noexpandtab
 
-set list listchars=tab:»·,trail:·
 
 " per .git vim configs
 " just `git config vim.settings "expandtab sw=4 sts=4"` in a git repository
@@ -138,3 +135,7 @@ if strlen(git_settings)
         exe "set" git_settings
 endif
 
+augroup save
+    autocmd!
+    au BufWritePost *.cc,*.hh,*.hxx,*.c,*.h :silent !clang-format -i %:p
+augroup END
