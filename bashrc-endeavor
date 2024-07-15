@@ -1,110 +1,54 @@
-#
 # ~/.bashrc
-#
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-[[ -f ~/.welcome_screen ]] && . ~/.welcome_screen
+# Limits recursive functions, see 'man bash'
+[[ -z "$FUNCNEST" ]] && export FUNCNEST=100
 
-_set_liveuser_PS1() {
-    PS1='[\u@\h \W]\$ '
-    if [ "$(whoami)" = "liveuser" ] ; then
-        local iso_version="$(grep ^VERSION= /usr/lib/endeavouros-release 2>/dev/null | cut -d '=' -f 2)"
-        if [ -n "$iso_version" ] ; then
-            local prefix="eos-"
-            local iso_info="$prefix$iso_version"
-            PS1="[\u@$iso_info \W]\$ "
-        fi
-    fi
-}
-_set_liveuser_PS1
-unset -f _set_liveuser_PS1
-
+# Update PS1
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-# PS1='[\u@linux \W]\$ '
 PS1="\[\e[32m\][\[\e[m\]\[\e[31m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[32m\]linux\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[32m\]]\[\e[m\]\[\e[32m\]\$(parse_git_branch)\[\033[00m\] \$ "
 
-
-ShowInstallerIsoInfo() {
-    local file=/usr/lib/endeavouros-release
-    if [ -r $file ] ; then
-        cat $file
-    else
-        echo "Sorry, installer ISO info is not available." >&2
-    fi
-}
-
-[[ "$(whoami)" = "root" ]] && return
-
-[[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
-
-## Use the up and down arrow keys for finding a command in history
-## (you can write some initial letters of the command first).
+# Use the up and down arrow keys for finding a command in history
+# (you can write some initial letters of the command first).
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
-################################################################################
-## Some generally useful functions.
-## Consider uncommenting aliases below to start using these functions.
-##
-## October 2021: removed many obsolete functions. If you still need them, please look at
-## https://github.com/EndeavourOS-archive/EndeavourOS-archiso/raw/master/airootfs/etc/skel/.bashrc
+export LANG=en_US.utf8
+export EDITOR=vim
 
-_open_files_for_editing() {
-    # Open any given document file(s) for editing (or just viewing).
-    # Note1:
-    #    - Do not use for executable files!
-    # Note2:
-    #    - Uses 'mime' bindings, so you may need to use
-    #      e.g. a file manager to make proper file bindings.
+# Color support for less
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
-    if [ -x /usr/bin/exo-open ] ; then
-        echo "exo-open $@" >&2
-        setsid exo-open "$@" >& /dev/null
-        return
-    fi
-    if [ -x /usr/bin/xdg-open ] ; then
-        for file in "$@" ; do
-            echo "xdg-open $file" >&2
-            setsid xdg-open "$file" >& /dev/null
-        done
-        return
-    fi
+# Zoxide
+eval "$(zoxide init --cmd cd bash)"
 
-    echo "$FUNCNAME: package 'xdg-utils' or 'exo' is required." >&2
-}
-
-#------------------------------------------------------------
-
-## Aliases for the functions above.
-## Uncomment an alias if you want to use it.
-##
-
-# alias ef='_open_files_for_editing'     # 'ef' opens given file(s) for editing
-# alias pacdiff=eos-pacdiff
-################################################################################
-
-. ~/.z.sh
-
+# Aliases
 alias ls='ls --color=auto'
-alias nano=sl
-alias l='ls -lav --ignore=. --ignore=..'   # show long listing but no hidden dotfiles except "."
+alias l='ls -lav --ignore=. --ignore=..'
+
 alias rm='rm -v --preserve-root'
 alias mkdir='mkdir -p'
-alias ..='cd ..'
 
 alias bat='bat -p'
-alias py='python3'
+alias grep='grep --color -n'
 alias untar='tar -xvf'
-alias display=sl
 
 alias gdb='gdb -q -tui'
 alias cf='clang-format --verbose -i'
 alias make='make -j'
+
+alias py='python3'
 
 alias gcce='gcc -std=c99 -Wall -Wextra -Werror -Wvla -pedantic'
 alias gcct='gcc -std=c99 -Wall -Wextra -Werror -Wvla -pedantic -fsanitize=address -g'
@@ -112,8 +56,6 @@ alias gcct='gcc -std=c99 -Wall -Wextra -Werror -Wvla -pedantic -fsanitize=addres
 alias gpp='g++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++20 *.cc -o '
 alias clangpp='clang++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++20 *.cc -o '
 
-export PATH=$PATH:~/.nix-profile/bin:/opt:/opt/apache-maven-3.8.8/bin
+# Postgres
 export PGDATA="$HOME/postgres_data"
 export PGHOST="/tmp"
-
-eval "$(zoxide init --cmd cd bash)"
