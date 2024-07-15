@@ -57,6 +57,8 @@ new_window pixel 1
 gaps inner 6
 gaps outer 3
 
+smart_gaps on
+
 # show window title bars (not officially supported with i3gaps)
 #default_border normal
 
@@ -143,29 +145,29 @@ bindcode $mod+Shift+81 	 move container to workspace  $ws9
 bindcode $mod+Shift+90 	 move container to workspace  $ws10
 
 # resize window (you can also use the mouse for that):
-#mode "resize" {
+mode "resize" {
 # These bindings trigger as soon as you enter the resize mode
 # Pressing left will shrink the window's width.
 # Pressing right will grow the window's width.
 # Pressing up will shrink the window's height.
 # Pressing down will grow the window's height.
-#        bindsym j resize shrink width 10 px or 10 ppt
-#        bindsym k resize grow height 10 px or 10 ppt
-#        bindsym l resize shrink height 10 px or 10 ppt
-#        bindsym ntilde resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ntilde resize grow width 10 px or 10 ppt
 
 # same bindings, but for the arrow keys
-#	bindsym Left resize shrink width 10 px or 10 ppt
-#        bindsym Down resize grow height 10 px or 10 ppt
-#        bindsym Up resize shrink height 10 px or 10 ppt
-#        bindsym Right resize grow width 10 px or 10 ppt
+	bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
 
 # back to normal: Enter or Escape
-#	bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
+	bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
-#bindsym $mod+r mode "resize"
+bindsym $mod+r mode "resize"
 
 ######################################
 # keybindings for different actions: #
@@ -205,8 +207,8 @@ bindsym F1 exec --no-startup-id ~/.config/i3/scripts/keyhint-2
 # Backlight setting using dunst osc
 #bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_up
 #bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_down
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --min-val=2 -q set 5%-
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --min-val=0 -q set 2%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -q set 2%+
 
 # change focus
 bindsym $mod+j focus left
@@ -242,9 +244,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+g layout tabbed
-bindsym $mod+e layout toggle split
+# bindsym $mod+s layout stacking
+# bindsym $mod+g layout tabbed
+# bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -584,16 +586,21 @@ bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
 
 ## rofi bindings for window menu ($mod+t /F10 optional disabled)
 
-bindsym $mod+t exec --no-startup-id rofi -show window \
-		-config ~/.config/rofi/rofidmenu.rasi
+#bindsym $mod+t exec --no-startup-id rofi -show window \
+#		-config ~/.config/rofi/rofidmenu.rasi
 
 #bindsym F10 exec --no-startup-id rofi -show window \
 #		-config ~/.config/rofi/rofidmenu.rasi
 
 ## rofi bindings to manage clipboard (install rofi-greenclip from the AUR)
 
-#exec --no-startup-id greenclip daemon>/dev/null
-#bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard \
-#		-config ~/.config/rofi/rofidmenu.rasi
+exec --no-startup-id greenclip daemon>/dev/null
+bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard \
+		-config ~/.config/rofi/rofidmenu.rasi
+
+bindsym $mod+x exec --no-startup-id rofi -modi emoji -show emoji \
+                -config ~/.config/rofi/rofidmenu.rasi
+
+bindsym $mod+s exec --no-startup-id flameshot gui
 
 exec --no-startup-id flameshot

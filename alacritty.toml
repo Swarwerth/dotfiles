@@ -3,7 +3,7 @@ import = [
 ]
 
 [font]
-size = 10
+size = 8
 
 [keyboard]
 bindings = [
