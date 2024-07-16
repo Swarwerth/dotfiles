@@ -174,7 +174,6 @@ bindsym $mod+r mode "resize"
 ######################################
 
 # start a terminal
-#bindsym $mod+Return exec --no-startup-id xfce4-terminal
 bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
@@ -453,7 +452,7 @@ exec --no-startup-id /usr/bin/dunst
 #exec --no-startup-id nm-applet
 
 # clipman-applet
-exec --no-startup-id xfce4-clipman
+#exec --no-startup-id xfce4-clipman
 
 ##################
 # floating rules #

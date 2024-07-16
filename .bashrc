@@ -43,6 +43,8 @@ alias mkdir='mkdir -p'
 alias bat='bat -p'
 alias grep='grep --color -n'
 alias untar='tar -xvf'
+alias vim='nvim'
+alias tree='tree -Ca -I .git'
 
 alias gdb='gdb -q -tui'
 alias cf='clang-format --verbose -i'
