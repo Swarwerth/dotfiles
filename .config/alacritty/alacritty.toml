@@ -1,11 +1,12 @@
-import = [
-    "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
-]
-
 [font]
 size = 8
 
 [keyboard]
 bindings = [
 { key = "Return", mods = "Control | Shift", action = "SpawnNewInstance" },
+]
+
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
 ]
