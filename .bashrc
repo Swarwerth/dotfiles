@@ -37,7 +37,7 @@ eval "$(zoxide init --cmd cd bash)"
 alias ls='ls --color=auto'
 alias l='ls -lav --ignore=. --ignore=..'
 
-alias rm='rm -v --preserve-root'
+alias rm='rm -v -r --preserve-root'
 alias mkdir='mkdir -p'
 
 alias bat='bat -p'
@@ -61,6 +61,7 @@ alias clangpp='clang++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++
 # Postgres
 export PGDATA="$HOME/postgres_data"
 export PGHOST="/tmp"
+export PGPORT="5432"
 
 # Path
 
