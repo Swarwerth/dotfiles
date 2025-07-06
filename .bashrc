@@ -8,7 +8,7 @@
 
 # Update PS1
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 PS1="\[\e[32m\][\[\e[m\]\[\e[31m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[32m\]linux\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[32m\]]\[\e[m\]\[\e[32m\]\$(parse_git_branch)\[\033[00m\] \$ "
@@ -20,6 +20,7 @@ bind '"\e[B":history-search-forward'
 
 export LANG=en_US.utf8
 export EDITOR=vim
+export BROWSER='/usr/bin/firefox'
 
 # Color support for less
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
@@ -61,11 +62,10 @@ alias clangpp='clang++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++
 # Postgres
 export PGDATA="$HOME/postgres_data"
 export PGHOST="/tmp"
-export PGPORT="5432"
 
 # Path
 
-export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux
+export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux:/var/lib/snapd/snap/bin
 export MANPATH=$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info
 

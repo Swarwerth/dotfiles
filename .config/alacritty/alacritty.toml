@@ -1,5 +1,6 @@
 [font]
 size = 8
+normal.family = "0xProto Nerd Font"
 
 [keyboard]
 bindings = [
@@ -8,5 +9,5 @@ bindings = [
 
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
+    "~/.config/alacritty/themes/catppuccin_mocha.toml"
 ]
