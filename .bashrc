@@ -65,7 +65,7 @@ export PGHOST="/tmp"
 
 # Path
 
-export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux:/var/lib/snapd/snap/bin
+export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux:/var/lib/snapd/snap/bin:/home/swar/.local/bin
 export MANPATH=$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info
 
