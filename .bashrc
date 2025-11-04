@@ -46,18 +46,14 @@ alias grep='grep --color -n'
 alias untar='tar -xvf'
 alias vim='nvim'
 alias tree='tree -Ca -I .git'
+alias feh='feh --draw-filename --on-last-slide hold --scale-down --draw-tinted'
 
 alias gdb='gdb -q -tui'
 alias cf='clang-format --verbose -i'
 alias make='make -j'
 
 alias py='python3'
-
-alias gcce='gcc -std=c99 -Wall -Wextra -Werror -Wvla -pedantic'
-alias gcct='gcc -std=c99 -Wall -Wextra -Werror -Wvla -pedantic -fsanitize=address -g'
-
-alias gpp='g++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++20 *.cc -o '
-alias clangpp='clang++ -Wall -Wextra -Wold-style-cast -Werror -pedantic -std=c++20 *.cc -o '
+alias fx='firefox'
 
 # Postgres
 export PGDATA="$HOME/postgres_data"
