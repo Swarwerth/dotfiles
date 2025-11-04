@@ -1,16 +1,15 @@
 [user]
     email = clement.nguyen@epita.fr
     name = Clément Nguyen
-    signingkey = 06211D2BF6F529D6
 
 [alias]
     kk = status --untracked-files
     cm = commit -m
-    cs = commit -S -m
     pusht = push --follow-tags
     sw = switch
     tg = tag -ma
     pl = pull --rebase
+    pmr = push -o merge_request.create
 
     lg = lg1
     lg1 = lg1-specific --all
@@ -29,8 +28,6 @@
 	editor = vim
 [pull]
 	rebase = true
-[commit]
-	gpgsign = true
 
 [includeIf "gitdir:/~/Prologin/"]
     path = "~/Prologin/.gitconfig"
