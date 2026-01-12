@@ -54,6 +54,7 @@ alias make='make -j'
 
 alias py='python3'
 alias fx='firefox'
+alias lgit='lazygit'
 
 # Postgres
 export PGDATA="$HOME/postgres_data"

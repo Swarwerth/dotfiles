@@ -14,3 +14,7 @@ opt.shiftwidth = 4 -- Number of spaces inserted when indenting
 opt.spelllang = { "en", "fr" }
 
 opt.sidescrolloff = 2 -- Columns of context
+
+opt.cc = { 80 }
+
+-- vim.diagnostic.enable(false)
