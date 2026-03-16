@@ -6,6 +6,24 @@
 # Limits recursive functions, see 'man bash'
 [[ -z "$FUNCNEST" ]] && export FUNCNEST=100
 
+# Don't put duplicate lines or lines starting with space in the history
+# Set the size of the the history
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS
+shopt -s checkwinsize
+
+# The patern "**" used in a pathname expansion context will match all files
+# and zero or more directories and subdirectories
+shopt -s globstar
+
 # Update PS1
 parse_git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -35,26 +53,9 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 eval "$(zoxide init --cmd cd bash)"
 
 # Aliases
-alias ls='ls --color=auto'
-alias l='ls -lav --ignore=. --ignore=..'
-
-alias rm='rm -v -r --preserve-root'
-alias mkdir='mkdir -p'
-
-alias bat='bat -p'
-alias grep='grep --color -n'
-alias untar='tar -xvf'
-alias vim='nvim'
-alias tree='tree -Ca -I .git'
-alias feh='feh --draw-filename --on-last-slide hold --scale-down --draw-tinted'
-
-alias gdb='gdb -q -tui'
-alias cf='clang-format --verbose -i'
-alias make='make -j'
-
-alias py='python3'
-alias fx='firefox'
-alias lgit='lazygit'
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
 # Postgres
 export PGDATA="$HOME/postgres_data"
@@ -65,7 +66,3 @@ export PGHOST="/tmp"
 export PATH=$PATH:/usr/local/texlive/2024/bin/x86_64-linux:/var/lib/snapd/snap/bin:/home/swar/.local/bin
 export MANPATH=$MANPATH:/usr/local/texlive/2024/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:/usr/local/texlive/2024/texmf-dist/doc/info
-
-# Launch fastfetch
-
-fastfetch
