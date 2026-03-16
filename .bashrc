@@ -24,6 +24,10 @@ shopt -s checkwinsize
 # and zero or more directories and subdirectories
 shopt -s globstar
 
+# Minor errors in the spelling of a directory component in a cd command will
+# be corrected
+shopt -s cdspell
+
 # Update PS1
 parse_git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
